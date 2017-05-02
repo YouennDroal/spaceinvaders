@@ -29,11 +29,7 @@ public class SpaceInvaders {
 			return ((x >= 0) && (x < longueur)) && ((y >= 0) && (y < hauteur));
 		}
 	    
-		@Override
-		public String toString() {
-			return recupererEspaceJeuDansChaineASCII();
-		}
-
+		
 		public String recupererEspaceJeuDansChaineASCII() {
 			StringBuilder espaceDeJeu = new StringBuilder();
 			for (int y = 0; y < hauteur; y++) {
@@ -61,5 +57,21 @@ public class SpaceInvaders {
 			return vaisseau!=null;
 		}
 
+	    public void deplacerVaisseauVersLaDroite() {
+	            if (peutSeDeplacerDroite()) vaisseau.seDeplacerVersLaDroite();
+	    }
+
+		public void deplacerVaisseauVersLaGauche() {
+           	if (peutSeDeplacerGauche()) vaisseau.seDeplacerVersLaGauche();
+			
+		}
+
+		private boolean peutSeDeplacerGauche() {
+			return vaisseau.abscisse()>1;
+		}
+		
+		private boolean peutSeDeplacerDroite() {
+			return vaisseau.abscisse()< (longueur-1);
+		}
 		
 }
