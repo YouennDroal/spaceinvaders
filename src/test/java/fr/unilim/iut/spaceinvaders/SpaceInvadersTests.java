@@ -1,15 +1,26 @@
  package fr.unilim.iut.spaceinvaders;
 
     import static org.junit.Assert.assertEquals;
+    import static org.junit.Assert.fail;
     import org.junit.Test;
+    import fr.unilim.iut.spaceinvaders.utils.HorsEspaceJeuException;
 
-import fr.unilim.iut.spaceinvaders.utils.HorsEspaceJeuException;
+    import org.junit.Before;
+	
 
     public class SpaceInvadersTests {
+    	
+    	
+	   private SpaceInvaders spaceinvaders;
 	
+		@Before
+		public void initialisation() {
+		    spaceinvaders = new SpaceInvaders(15, 10);
+		}
+
+		
 	   @Test
 	   public void test_AuDebut_JeuSpaceInvaderEstVide() {
-		    SpaceInvaders spaceInvaders = new SpaceInvaders(15, 10);
 		    assertEquals("" + 
 		    "...............\n" + 
 		    "...............\n" +
@@ -20,12 +31,12 @@ import fr.unilim.iut.spaceinvaders.utils.HorsEspaceJeuException;
 		    "...............\n" + 
 		    "...............\n" + 
 		    "...............\n" + 
-		    "...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+		    "...............\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
 		    
 	        }
+	   
 		@Test
 		public void test_unNouveauVaisseauEstCorrectementPositionneDansEspaceJeu() {
-			SpaceInvaders spaceinvaders = new SpaceInvaders(15, 10);
 			spaceinvaders.positionnerUnNouveauVaisseau(7,9);
 			assertEquals("" + 
 			"...............\n" + 
@@ -42,9 +53,39 @@ import fr.unilim.iut.spaceinvaders.utils.HorsEspaceJeuException;
 		}
 		
 	    @Test(expected = HorsEspaceJeuException.class)
-		public void test_unNouveauVaisseauEstPositionneHorsEspaceJeuTropADroite_UneExceptionEstLevee() throws Exception {
+		public void test_unNouveauVaisseauEstPositionneHorsEspaceJeuTropEnBas_UneExceptionEstLevee() throws Exception {
 			SpaceInvaders spaceinvaders = new SpaceInvaders(15, 10);
-			spaceinvaders.positionnerUnNouveauVaisseau(15,9);
+			spaceinvaders.positionnerUnNouveauVaisseau(14,10);
 		}
-
+	    
+	    @Test
+		public void test_UnNouveauVaisseauPositionneHorsEspaceJeu_DoitLeverUneException() {			
+			try {
+				spaceinvaders.positionnerUnNouveauVaisseau(15,9);
+				fail("Position trop à droite : devrait déclencher une exception HorsEspaceJeuException");
+			} catch (final HorsEspaceJeuException e) {
+			}
+			
+			
+			try {
+				spaceinvaders.positionnerUnNouveauVaisseau(-1,9);
+				fail("Position trop à gauche : devrait déclencher une exception HorsEspaceJeuException");
+			} catch (final HorsEspaceJeuException e) {
+			}
+			
+			
+			try {
+				spaceinvaders.positionnerUnNouveauVaisseau(14,10);
+				fail("Position trop en bas : devrait déclencher une exception HorsEspaceJeuException");
+			} catch (final HorsEspaceJeuException e) {
+			}
+			
+			
+			try {
+				spaceinvaders.positionnerUnNouveauVaisseau(14,-1);
+				fail("Position trop à haut : devrait déclencher une exception HorsEspaceJeuException");
+			} catch (final HorsEspaceJeuException e) {
+			}
+				
+		}
        }
