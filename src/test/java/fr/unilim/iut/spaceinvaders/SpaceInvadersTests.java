@@ -114,7 +114,7 @@
 			
 			spaceinvaders.positionnerUnNouveauVaisseau(14,9);
 
-	 		spaceinvaders.deplacerVaisseauVersLaDroite();
+			spaceinvaders.deplacerVaisseauVersLaDroite();
 			
 			assertEquals("" + 
 			"...............\n" + 
