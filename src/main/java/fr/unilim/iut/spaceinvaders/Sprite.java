@@ -44,14 +44,11 @@ public abstract class Sprite {
 		   return this.origine.abscisse();
 	   }
 
-	public void seDeplacerVersLaDroite() {
-		this.origine.changerAbscisse(this.origine.abscisse() + vitesse);
-	}
 
-	public void seDeplacerVersLaGauche() {
-		this.origine.changerAbscisse(this.origine.abscisse() - vitesse);
-	}
-
+	  public void deplacerHorizontalementVers(Direction direction) {
+			this.origine.changerAbscisse(this.origine.abscisse() + direction.valeur()*vitesse);
+		}
+	  
 	public void positionner(int x, int y) {
 		   this.origine.changerAbscisse(x);
 		   this.origine.changerOrdonnee(y);
@@ -64,5 +61,8 @@ public abstract class Sprite {
 	public int longueur() {
 		return this.dimension.longueur();
 	}
-
+	
+	public void deplacerVerticalementVers(Direction direction) {
+		this.origine.changerOrdonnee(this.origine.ordonnee() + direction.valeur()*vitesse);
+	}
 }
