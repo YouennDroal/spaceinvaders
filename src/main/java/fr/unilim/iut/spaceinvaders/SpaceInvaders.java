@@ -139,13 +139,16 @@ public class SpaceInvaders implements Jeu {
 	         if (commandeUser.droite) {
 		        deplacerVaisseauVersLaDroite();
 	         }
+	         
 	         if (commandeUser.tir && !this.aUnMissile()){
 	             tirerUnMissile(new Dimension(Constante.MISSILE_LONGUEUR, Constante.MISSILE_HAUTEUR),
 	  					Constante.MISSILE_VITESSE);
 	         }
+	         
 	         if (aUnMissile()){
 	        	 deplacerMissile();
 	         }
+	         
 	         if (aUnEnvahisseur()){
 	        	 if (envahisseur.abscisseLaPlusADroite()==this.longueur-1){
 	        		 this.envahisseurEstADroite = true;
@@ -159,13 +162,19 @@ public class SpaceInvaders implements Jeu {
 	        	 else{
 	        		 deplacerEnvahisseurVersLaDroite();
 	        	 }
+	        	
 	         }
+	         
+	         if (aUnMissile() && aUnEnvahisseur()){
+	        	 etreFini();
+	         }
+	 
 	       }
 
 	   
 	      @Override
 	      public boolean etreFini() {
-	         return false; 
+	         return collisionMissileEnvahisseur(); 
 	      }
 	      
 	      
@@ -244,6 +253,12 @@ public class SpaceInvaders implements Jeu {
 
 		}
 		
-
+		public boolean collisionMissileEnvahisseur() {
+			 		if (aUnMissile() && aUnEnvahisseur()) {
+			 		if (Collision.detecterCollision(envahisseur, missile))
+			 				return true;
+			 		}
+			  		return false;
+		}
 		
 }
