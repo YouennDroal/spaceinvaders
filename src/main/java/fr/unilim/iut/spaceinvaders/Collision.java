@@ -13,7 +13,7 @@ package fr.unilim.iut.spaceinvaders;
  	private static boolean superpositionDeSprites(Sprite missile, Sprite envahisseur) {
  		return missile.abscisseLaPlusAGauche()<envahisseur.abscisseLaPlusADroite() 
  				&& missile.abscisseLaPlusADroite()> envahisseur.abscisseLaPlusAGauche() 
- 			&& missile.ordonneeLaPlusBasse() < envahisseur.ordonneeLaPlusHaute()
- 			&& missile.ordonneeLaPlusHaute() > envahisseur.ordonneeLaPlusBasse();
+ 				&& missile.ordonneeLaPlusBasse() < envahisseur.ordonneeLaPlusHaute() 
+ 				&& missile.ordonneeLaPlusHaute() > envahisseur.ordonneeLaPlusBasse();
  	}
  }

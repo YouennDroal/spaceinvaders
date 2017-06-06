@@ -12,41 +12,26 @@ package fr.unilim.iut.spaceinvaders;
  
  public class CollisionTest {
  
- 	private SpaceInvaders spaceInvaders;
+ 	private SpaceInvaders spaceinvaders;
  	
  	@Before
      public void initialisation() {
-     spaceInvaders = new SpaceInvaders(15, 10);
- 	    spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3,2),new Position(7,9), 1);
-    	spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(3,2),new Position(7,1), 1);
- 	   	spaceInvaders.tirerUnMissile(new Dimension(1,2),2);
+     spaceinvaders = new SpaceInvaders(15, 10);
+ 	    spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(3,2),new Position(7,9), 1);
+    	spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3,2),new Position(7,1), 1);
+ 	   	spaceinvaders.tirerUnMissile(new Dimension(1,2),2);
     }
  	
  	@Test
- 	public void test_InitialisationDuJeu() {
- 		assertEquals("" + 
- 		".......EEE.....\n" + 
- 		".......EEE.....\n" +
- 		"...............\n" + 
- 		"...............\n" + 
- 		"...............\n" + 
- 		"...............\n" + 
- 		"........M......\n" + 
- 		"........M......\n" + 
- 		".......VVV.....\n" + 
- 		".......VVV.....\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
- 	}
- 
- 	@Test
-	public void CollisionTest_Pas_De_Collision(){ 
-		assertEquals(false,Collision.detecterCollision(spaceInvaders.recupererMissile(), spaceInvaders.recupererEnvahisseur()));
+	public void testCollision_Pas_De_Collision(){ 
+		assertEquals(false,Collision.detecterCollision(spaceinvaders.recupererMissile(), spaceinvaders.recupererEnvahisseur()));
  	}
  	
  	@Test
- 	public void CollisionTest_Collision(){
- 	spaceInvaders.deplacerMissile();
- 		spaceInvaders.deplacerMissile();
- 		spaceInvaders.deplacerMissile();
- 		assertEquals(true,Collision.detecterCollision(spaceInvaders.recupererMissile(), spaceInvaders.recupererEnvahisseur()));
+ 	public void testCollision_Collision(){
+ 		for(int i=0;i<3;i++){
+ 		spaceinvaders.deplacerMissile();
+ 		}
+ 		assertEquals(true,Collision.detecterCollision(spaceinvaders.recupererMissile(), spaceinvaders.recupererEnvahisseur()));
  	}
 }

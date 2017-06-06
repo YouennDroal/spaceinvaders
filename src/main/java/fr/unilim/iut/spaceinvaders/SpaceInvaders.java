@@ -171,13 +171,19 @@ public class SpaceInvaders implements Jeu {
 	         if (aUnMissile() && aUnEnvahisseur()){
 	        	 etreFini();
 	         }
+	         
+
 	 
 	       }
 
 	   
 	      @Override
 	      public boolean etreFini() {
+	    	  if (envahisseur.ordonneeLaPlusHaute()>=this.hauteur){
+		        	 return true;
+		     }
 	         return collisionMissileEnvahisseur(); 
+	        
 	      }
 	      
 	      
